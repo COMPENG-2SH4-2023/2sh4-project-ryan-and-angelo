@@ -20,6 +20,7 @@ void LoopDelay(void);
 void CleanUp(void);
 
 // Player* playerPtr; 
+objPos player(15, 7, 'P');
 
 int main(void)
 {
@@ -72,40 +73,24 @@ void DrawScreen(void)
 
     MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
 
-    //const int BOARD_WIDTH = 20;
-    //const int BOARD_HEIGHT = 10;
-
-/*
-    objPos player(5, 5, 'P');
-    objPos char1(2, 3, 'A');
-    objPos char2(7, 4, 'B');
-    objPos char3(12, 7, 'C');
 
 
-    for (int i = 0; i < BOARD_HEIGHT; i++) {
-        for (int j = 0; j < BOARD_WIDTH; j++) {
-            if (i == 0 || i == BOARD_HEIGHT - 1 || j == 0 || j == BOARD_WIDTH - 1) {
+
+    for (int i = 0; i < myGM->getBoardSizeY(); i++) {
+        for (int j = 0; j < myGM->getBoardSizeX(); j++) {
+            if (i == 0 || i ==  myGM->getBoardSizeY()- 1 || j == 0 || j ==  myGM->getBoardSizeX()- 1) {
                 std::cout << "#";
             }
              else if (i == player.y && j == player.x) {
                 std::cout << player.getSymbol();
             }
-           
-            else if ((i == char1.y && j == char1.x) || (i == char2.y && j == char2.x) || (i == char3.y && j == char3.x)) {
-                if (i == char1.y && j == char1.x) {
-                    std::cout << char1.getSymbol();
-                } else if (i == char2.y && j == char2.x) {
-                    std::cout << char2.getSymbol();
-                } else if (i == char3.y && j == char3.x) {
-                    std::cout << char3.getSymbol();
-                }
-            } else {
+           else {
                 std::cout << " ";
             }
         }
         std::cout << std::endl;
     }
-`*/
+
 
 
 }
@@ -119,7 +104,5 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();    
-    // delete playerPtr;
-    // playerPtr = nullptr;
     MacUILib_uninit();
 }
