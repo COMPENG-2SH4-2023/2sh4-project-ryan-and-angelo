@@ -61,6 +61,8 @@ void GetInput(void)
 void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
+
+    myPlayer->movePlayer();
 }
 
 void DrawScreen(void)
@@ -81,8 +83,8 @@ void DrawScreen(void)
             if (i == 0 || i ==  myGM->getBoardSizeY()- 1 || j == 0 || j ==  myGM->getBoardSizeX()- 1) {
                 MacUILib_printf("#");
             }
-             else if (i == playerPos.y && j == playerPos.x) {
-                MacUILib_printf("%c",playerPos.getSymbol());
+             else if (i == tempPos.y && j == tempPos.x) {
+                MacUILib_printf("%c",tempPos.getSymbol());
             }
            else {
                 MacUILib_printf(" ");

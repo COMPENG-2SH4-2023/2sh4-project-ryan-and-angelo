@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "GameMechs.h"
+GameMechs* myvalue;
 
 
 Player::Player(GameMechs* thisGMRef)
@@ -76,16 +78,16 @@ if (myDir == UP)
 
         if (playerPos.y==0)
         {
-            playerPos.y=8;
+            playerPos.y=myvalue->getBoardSizeY()-1;
         }
     }
     else if (myDir == DOWN)
     {
-        if (playerPos.y < 9) 
+        if (playerPos.y < myvalue->getBoardSizeY()-1) 
         {
             playerPos.y++;
         }
-        if (playerPos.y==9)
+        if (playerPos.y==myvalue->getBoardSizeX()-1)
         {
             playerPos.y=1;
         }
@@ -99,17 +101,17 @@ if (myDir == UP)
         }
         if (playerPos.x==0)
         {
-            playerPos.x=18;
+            playerPos.x=myvalue->getBoardSizeX()-1;
         }
     }
     else if (myDir == RIGHT)
     {
 
-        if (playerPos.x < 19)
+        if (playerPos.x < myvalue->getBoardSizeX()-1)
         {
             playerPos.x++;
         }
-        if (playerPos.x==19)
+        if (playerPos.x== myvalue->getBoardSizeX()-1)
         {
             playerPos.x=1;
         }
