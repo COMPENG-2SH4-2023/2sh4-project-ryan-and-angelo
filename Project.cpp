@@ -106,5 +106,7 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();    
+    // delete myGM;
+    // delete myPlayer;
     MacUILib_uninit();
 }
