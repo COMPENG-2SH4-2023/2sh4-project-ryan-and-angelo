@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameMechs.h"
-GameMechs* myvalue;
+
+
 
 
 Player::Player(GameMechs* thisGMRef)
@@ -69,6 +70,8 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
+
+
 if (myDir == UP)
     {
         if (playerPos.y > 0) 
@@ -78,16 +81,16 @@ if (myDir == UP)
 
         if (playerPos.y==0)
         {
-            playerPos.y=myvalue->getBoardSizeY()-1;
+            playerPos.y= 13;
         }
     }
     else if (myDir == DOWN)
     {
-        if (playerPos.y < myvalue->getBoardSizeY()-1) 
+        if (playerPos.y < 14) 
         {
             playerPos.y++;
         }
-        if (playerPos.y==myvalue->getBoardSizeX()-1)
+        if (playerPos.y == 14)
         {
             playerPos.y=1;
         }
@@ -101,17 +104,17 @@ if (myDir == UP)
         }
         if (playerPos.x==0)
         {
-            playerPos.x=myvalue->getBoardSizeX()-1;
+            playerPos.x=28;
         }
     }
     else if (myDir == RIGHT)
     {
 
-        if (playerPos.x < myvalue->getBoardSizeX()-1)
+        if (playerPos.x < 29)
         {
             playerPos.x++;
         }
-        if (playerPos.x== myvalue->getBoardSizeX()-1)
+        if (playerPos.x== 29)
         {
             playerPos.x=1;
         }
