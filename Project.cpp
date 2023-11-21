@@ -20,7 +20,7 @@ void LoopDelay(void);
 void CleanUp(void);
 
 // Player* playerPtr; 
-objPos player(15, 7, 'P');
+objPos playerPos(15, 7, 'P');
 
 int main(void)
 {
@@ -81,8 +81,8 @@ void DrawScreen(void)
             if (i == 0 || i ==  myGM->getBoardSizeY()- 1 || j == 0 || j ==  myGM->getBoardSizeX()- 1) {
                 std::cout << "#";
             }
-             else if (i == player.y && j == player.x) {
-                std::cout << player.getSymbol();
+             else if (i == playerPos.y && j == playerPos.x) {
+                std::cout << playerPos.getSymbol();
             }
            else {
                 std::cout << " ";
