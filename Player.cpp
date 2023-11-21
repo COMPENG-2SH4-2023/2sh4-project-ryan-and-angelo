@@ -67,53 +67,53 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
-// if (myDir == UP)
-//     {
-//         if (playerPos.y > 0) 
-//         {
-//             playerPos.y--;
-//         }
+if (myDir == UP)
+    {
+        if (playerPos.y > 0) 
+        {
+            playerPos.y--;
+        }
 
-//         if (playerPos.y==0)
-//         {
-//             playerPos.y=8;
-//         }
-//     }
-//     else if (myDir == DOWN)
-//     {
-//         if (playerPos.y < 9) 
-//         {
-//             playerPos.y++;
-//         }
-//         if (playerPos.y==9)
-//         {
-//             playerPos.y=1;
-//         }
-//     }
-//     else if (myDir == LEFT)
-//     {
+        if (playerPos.y==0)
+        {
+            playerPos.y=8;
+        }
+    }
+    else if (myDir == DOWN)
+    {
+        if (playerPos.y < 9) 
+        {
+            playerPos.y++;
+        }
+        if (playerPos.y==9)
+        {
+            playerPos.y=1;
+        }
+    }
+    else if (myDir == LEFT)
+    {
 
-//         if (playerPos.x > 0) 
-//         {
-//             playerPos.x--;
-//         }
-//         if (playerPos.x==0)
-//         {
-//             playerPos.x=18;
-//         }
-//     }
-//     else if (myDir == RIGHT)
-//     {
+        if (playerPos.x > 0) 
+        {
+            playerPos.x--;
+        }
+        if (playerPos.x==0)
+        {
+            playerPos.x=18;
+        }
+    }
+    else if (myDir == RIGHT)
+    {
 
-//         if (playerPos.x < 19)
-//         {
-//             playerPos.x++;
-//         }
-//         if (playerPos.x==19)
-//         {
-//             playerPos.x=1;
-//         }
-//     }
+        if (playerPos.x < 19)
+        {
+            playerPos.x++;
+        }
+        if (playerPos.x==19)
+        {
+            playerPos.x=1;
+        }
+    }
 
 }
 

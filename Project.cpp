@@ -79,16 +79,16 @@ void DrawScreen(void)
     for (int i = 0; i < myGM->getBoardSizeY(); i++) {
         for (int j = 0; j < myGM->getBoardSizeX(); j++) {
             if (i == 0 || i ==  myGM->getBoardSizeY()- 1 || j == 0 || j ==  myGM->getBoardSizeX()- 1) {
-                std::cout << "#";
+                MacUILib_printf("#");
             }
              else if (i == playerPos.y && j == playerPos.x) {
-                std::cout << playerPos.getSymbol();
+                MacUILib_printf("%c",playerPos.getSymbol());
             }
            else {
-                std::cout << " ";
+                MacUILib_printf(" ");
             }
         }
-        std::cout << std::endl;
+        MacUILib_printf("\n");
     }
 
 
