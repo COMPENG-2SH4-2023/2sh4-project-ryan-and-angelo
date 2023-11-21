@@ -7,7 +7,7 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     // more actions to be included
-    // playerPos.setObjPos= (5,5,'@');
+    playerPos.setObjPos(mainGameMechsRef->getBoardSizeX() / 2, mainGameMechsRef->getBoardSizeY() / 2, '@');
 }
 
 
@@ -30,36 +30,37 @@ void Player::updatePlayerDir()
     // game mech will find out where to get input
     // it lies within the Gamemechanism* member
 
+    char input = mainGameMechsRef->getInput();
 
-    // switch (input)
-    // {
-    //     case 'w':
-    //         if (myDir != UP && myDir != DOWN)
-    //             myDir = UP;
-    //         break;
+    switch (input)
+    {
+        case 'w':
+            if (myDir != UP && myDir != DOWN)
+                myDir = UP;
+            break;
 
-    //     case 'a':
-    //         if (myDir != LEFT && myDir != RIGHT)
-    //             myDir = LEFT;
-    //         break;
+        case 'a':
+            if (myDir != LEFT && myDir != RIGHT)
+                myDir = LEFT;
+            break;
 
-    //     case 's':
-    //         if (myDir != UP && myDir != DOWN)
-    //             myDir = DOWN;
-    //         break;
+        case 's':
+            if (myDir != UP && myDir != DOWN)
+                myDir = DOWN;
+            break;
 
-    //     case 'd':
-    //         if (myDir != LEFT && myDir != RIGHT)
-    //             myDir = RIGHT;
-    //         break;
+        case 'd':
+            if (myDir != LEFT && myDir != RIGHT)
+                myDir = RIGHT;
+            break;
 
-    //     default:
-    //         break;
+        default:
+            break;
         
 
 
 
-    // }      
+    }      
 }
 
 void Player::movePlayer()
