@@ -10,7 +10,7 @@ using namespace std;
 #define DELAY_CONST 100000
 
 GameMechs* myGM;
-Player myPlayer;
+Player* myPlayer;
 
 void Initialize(void);
 void GetInput(void);
@@ -26,7 +26,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -44,10 +44,9 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    myGM = new GameMechs(26, 13); // make the board size 26x13
-    myPlayer = new Player(myGm);
+    myGM = new GameMechs(30, 15); // make the board size 26x13
+    myPlayer = new Player(myGM);
 
-    exitFlag = false;
 
     
     // playerPtr = new Player(/* Pass your game mechanics reference here */);
@@ -67,10 +66,16 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();
 
-   const int BOARD_WIDTH = 20;
-    const int BOARD_HEIGHT = 10;
+    objPos tempPos;
+    myPlayer->getPlayerPos(tempPos);
 
 
+    MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
+
+    //const int BOARD_WIDTH = 20;
+    //const int BOARD_HEIGHT = 10;
+
+/*
     objPos player(5, 5, 'P');
     objPos char1(2, 3, 'A');
     objPos char2(7, 4, 'B');
@@ -100,7 +105,7 @@ void DrawScreen(void)
         }
         std::cout << std::endl;
     }
-
+`*/
 
 
 }
