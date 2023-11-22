@@ -3,7 +3,6 @@
 
 
 
-GameMechs* myvalue;
 
 Player::Player(GameMechs* thisGMRef)
 {
@@ -19,6 +18,7 @@ Player::Player(GameMechs* thisGMRef)
 Player::~Player()
 {
     // delete any heap members here
+    delete thisGMRef;
 }
 
 void Player::getPlayerPos(objPos &returnPos)
@@ -39,6 +39,10 @@ void Player::updatePlayerDir()
 
     switch (input)
     {
+        case ' ':
+            mainGameMechsRef->setExitTrue();
+            break;
+
         case 'w':
             if (myDir != UP && myDir != DOWN)
                 myDir = UP;
@@ -71,7 +75,6 @@ void Player::updatePlayerDir()
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
-myvalue= new GameMechs(30, 15);
 
 if (myDir == UP)
     {
@@ -82,16 +85,16 @@ if (myDir == UP)
 
         if (playerPos.y==0)
         {
-            playerPos.y= myvalue->getBoardSizeY()-2;
+            playerPos.y= mainGameMechsRef->getBoardSizeY()-2;
         }
     }
     else if (myDir == DOWN)
     {
-        if (playerPos.y < myvalue->getBoardSizeY()-1) 
+        if (playerPos.y < mainGameMechsRef->getBoardSizeY()-1) 
         {
             playerPos.y++;
         }
-        if (playerPos.y == myvalue->getBoardSizeY()-1)
+        if (playerPos.y == mainGameMechsRef->getBoardSizeY()-1)
         {
             playerPos.y=1;
         }
@@ -105,17 +108,17 @@ if (myDir == UP)
         }
         if (playerPos.x==0)
         {
-            playerPos.x= myvalue->getBoardSizeX()-2;
+            playerPos.x= mainGameMechsRef->getBoardSizeX()-2;
         }
     }
     else if (myDir == RIGHT)
     {
 
-        if (playerPos.x < myvalue->getBoardSizeX()-1)
+        if (playerPos.x < mainGameMechsRef->getBoardSizeX()-1)
         {
             playerPos.x++;
         }
-        if (playerPos.x== myvalue->getBoardSizeX()-1)
+        if (playerPos.x== mainGameMechsRef->getBoardSizeX()-1)
         {
             playerPos.x=1;
         }

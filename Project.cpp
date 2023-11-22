@@ -20,7 +20,7 @@ void LoopDelay(void);
 void CleanUp(void);
 
 // Player* playerPtr; 
-objPos playerPos(15, 7, 'P');
+//objPos playerPos(15, 7, 'P');
 
 int main(void)
 {
@@ -43,7 +43,7 @@ int main(void)
 void Initialize(void)
 {
     MacUILib_init();
-    MacUILib_clearScreen();
+    //MacUILib_clearScreen();
 
     myGM = new GameMechs(30, 15); // make the board size 26x13
     myPlayer = new Player(myGM);
@@ -105,8 +105,8 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
-    // delete myGM;
-    // delete myPlayer;
+    //MacUILib_clearScreen();    
+    delete myGM;
+    delete myPlayer;
     MacUILib_uninit();
 }
