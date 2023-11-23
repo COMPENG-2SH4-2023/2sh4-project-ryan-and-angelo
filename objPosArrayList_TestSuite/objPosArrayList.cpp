@@ -50,8 +50,9 @@ void objPosArrayList::insertTail(objPos thisPos)
 
 void objPosArrayList::removeHead()
 {
-    if (listSize==0)
+    if (listSize<=1)
     { 
+        listSize=0;
         return;
     }
 
