@@ -3,6 +3,7 @@
 #include "objPos.h"
 #include "Player.h"
 #include "GameMechs.h"
+#include "Food.h"
 
 
 using namespace std;
@@ -11,6 +12,7 @@ using namespace std;
 
 GameMechs* myGM;
 Player* myPlayer;
+Food* foodGen;
 
 void Initialize(void);
 void GetInput(void);
@@ -48,7 +50,12 @@ void Initialize(void)
     myGM = new GameMechs(30, 15); // make the board size 26x13
     myPlayer = new Player(myGM);
 
+    foodGen = new Food();
 
+    objPos playerPos;
+    myPlayer->getPlayerPos(playerPos);
+
+    foodGen->generateFood(playerPos);
     
     // playerPtr = new Player(/* Pass your game mechanics reference here */);
 }
@@ -74,21 +81,25 @@ void DrawScreen(void)
     objPos tempPos;
     myPlayer->getPlayerPos(tempPos);
 
+    objPos foodPos;
+    foodGen->getFoodPos(foodPos);
+
 
     MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
 
 
-
-
     for (int i = 0; i < myGM->getBoardSizeY(); i++) {
         for (int j = 0; j < myGM->getBoardSizeX(); j++) {
-            if (i == 0 || i ==  myGM->getBoardSizeY()- 1 || j == 0 || j ==  myGM->getBoardSizeX()- 1) {
+            if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) {
                 MacUILib_printf("#");
             }
-             else if (i == tempPos.y && j == tempPos.x) {
-                MacUILib_printf("%c",tempPos.getSymbol());
+            else if (i == tempPos.y && j == tempPos.x) {
+                MacUILib_printf("%c", tempPos.getSymbol());
             }
-           else {
+            else if (i == foodPos.y && j == foodPos.x) {
+                MacUILib_printf("%c", foodPos.symbol);
+            }
+            else {
                 MacUILib_printf(" ");
             }
         }
@@ -108,6 +119,8 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     //MacUILib_clearScreen();    
+    delete foodGen;
+
     delete myGM;
     delete myPlayer;
     MacUILib_uninit();
