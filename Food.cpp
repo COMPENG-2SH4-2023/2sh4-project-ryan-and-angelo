@@ -10,6 +10,11 @@ Food::Food()
 
 }
 
+Food::Food(GameMechs* foodGM)
+{
+    foodGame = foodGM;
+}
+
 // destructor
 Food::~Food()
 {
@@ -18,17 +23,17 @@ Food::~Food()
 
 void Food::generateFood(objPos blockOff)
 {
-    GameMechs* foodGM;
+    
     srand(time(NULL));
 
-    int candidateX, candidateY, boardX, boardY;
+    int candidateX, candidateY;
     int overlap = 1;  
 
 
     while (overlap)
     {
-        candidateX = rand() % (30- 2) + 1;
-        candidateY = rand() % (15 - 2) + 1;
+        candidateX = rand() % (foodGame->getBoardSizeX() - 2) + 1;
+        candidateY = rand() % (foodGame->getBoardSizeY() - 2) + 1;
         
        
         overlap = (candidateX == blockOff.x && candidateY == blockOff.y);

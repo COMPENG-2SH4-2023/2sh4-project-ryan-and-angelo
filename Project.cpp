@@ -48,9 +48,9 @@ void Initialize(void)
     //MacUILib_clearScreen();
 
     myGM = new GameMechs(30, 15); // make the board size 26x13
-    myPlayer = new Player(myGM);
+    foodGen = new Food(myGM);
+    myPlayer = new Player(myGM, foodGen);
 
-    foodGen = new Food();
 
     objPos playerPos;
     myPlayer->getPlayerPos(playerPos);

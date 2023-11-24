@@ -1,12 +1,15 @@
 #include "Player.h"
 #include "GameMechs.h"
+#include "Food.h"
+#include "objPos.h"
 
 
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef, Food* thisFoodRef)
 {
     mainGameMechsRef = thisGMRef;
+    foodRef = thisFoodRef;
     myDir = STOP;
 
     // more actions to be included
@@ -41,6 +44,11 @@ void Player::updatePlayerDir()
     {
         case ' ':
             mainGameMechsRef->setExitTrue();
+            break;
+
+        case 'r':
+            getPlayerPos(playerPos); 
+            foodRef->generateFood(playerPos);
             break;
 
         case 'w':
