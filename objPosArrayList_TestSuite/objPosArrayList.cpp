@@ -82,6 +82,10 @@ void objPosArrayList::getHeadElement(objPos &returnPos)
 
 void objPosArrayList::getTailElement(objPos &returnPos)
 {
+    if (listSize==0)
+    {
+        return;
+    }
     returnPos.setObjPos(aList[listSize-1]);
 }
 

@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "GameMechs.h"
 #include "Food.h"
-
+#include "objPosArrayList.h"
 
 using namespace std;
 
@@ -51,9 +51,10 @@ void Initialize(void)
     foodGen = new Food(myGM);
     myPlayer = new Player(myGM, foodGen);
 
+    objPos playerPos {-1,-1,'o'};
 
-    objPos playerPos;
-    myPlayer->getPlayerPos(playerPos);
+    // objPos playerPos;
+    // myPlayer->getPlayerPos(playerPos);
 
     foodGen->generateFood(playerPos);
     
@@ -78,24 +79,44 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();
 
-    objPos tempPos;
-    myPlayer->getPlayerPos(tempPos);
+    bool drawn;
+
+    // objPos tempPos;
+    // myPlayer->getPlayerPos(tempPos);
+
+    objPosArrayList* playerBody =myPlayer->getPlayerPos();
+    objPos tempBody;
 
     objPos foodPos;
     foodGen->getFoodPos(foodPos);
 
 
-    MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
 
+      
 
     for (int i = 0; i < myGM->getBoardSizeY(); i++) {
         for (int j = 0; j < myGM->getBoardSizeX(); j++) {
+            drawn = false;
+            for (int k =0; k < playerBody->getSize(); k++)
+            {
+                playerBody->getElement(tempBody, k);
+                if (tempBody.x==j && tempBody.y==i)
+                {
+                    MacUILib_printf("%c",tempBody.symbol);
+                    drawn = true;
+                    break;
+                }
+            }
+            
+            if (drawn)
+            {
+                continue;
+            }
+
             if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) {
                 MacUILib_printf("#");
             }
-            else if (i == tempPos.y && j == tempPos.x) {
-                MacUILib_printf("%c", tempPos.getSymbol());
-            }
+            
             else if (i == foodPos.y && j == foodPos.x) {
                 MacUILib_printf("%c", foodPos.symbol);
             }
@@ -105,6 +126,29 @@ void DrawScreen(void)
         }
         MacUILib_printf("\n");
     }
+
+
+
+    // MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
+
+
+    // for (int i = 0; i < myGM->getBoardSizeY(); i++) {
+    //     for (int j = 0; j < myGM->getBoardSizeX(); j++) {
+    //         if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) {
+    //             MacUILib_printf("#");
+    //         }
+    //         else if (i == tempPos.y && j == tempPos.x) {
+    //             MacUILib_printf("%c", tempPos.getSymbol());
+    //         }
+    //         else if (i == foodPos.y && j == foodPos.x) {
+    //             MacUILib_printf("%c", foodPos.symbol);
+    //         }
+    //         else {
+    //             MacUILib_printf(" ");
+    //         }
+    //     }
+    //     MacUILib_printf("\n");
+    // }
 
 
 
