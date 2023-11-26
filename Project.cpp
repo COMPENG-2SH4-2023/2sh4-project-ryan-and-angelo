@@ -13,6 +13,7 @@ using namespace std;
 GameMechs* myGM;
 Player* myPlayer;
 Food* foodGen;
+objPosArrayList* playerPosList;
 
 void Initialize(void);
 void GetInput(void);
@@ -45,18 +46,14 @@ int main(void)
 void Initialize(void)
 {
     MacUILib_init();
-    //MacUILib_clearScreen();
+    MacUILib_clearScreen();
 
     myGM = new GameMechs(30, 15); // make the board size 26x13
     foodGen = new Food(myGM);
     myPlayer = new Player(myGM, foodGen);
+    playerPosList = new objPosArrayList();
 
-    objPos playerPos {-1,-1,'o'};
-
-    // objPos playerPos;
-    // myPlayer->getPlayerPos(playerPos);
-
-    foodGen->generateFood(playerPos);
+    foodGen->generateFood(*playerPosList);
     
     // playerPtr = new Player(/* Pass your game mechanics reference here */);
 }
@@ -164,7 +161,7 @@ void CleanUp(void)
 {
     //MacUILib_clearScreen();    
     delete foodGen;
-
+    delete playerPosList;
     delete myGM;
     delete myPlayer;
     MacUILib_uninit();

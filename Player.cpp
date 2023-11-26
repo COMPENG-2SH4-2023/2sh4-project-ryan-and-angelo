@@ -2,7 +2,7 @@
 #include "GameMechs.h"
 #include "Food.h"
 #include "objPos.h"
-
+#include "objPosArrayList.h"
 
 
 
@@ -22,10 +22,10 @@ Player::Player(GameMechs* thisGMRef, Food* thisFoodRef)
     playerPosList = new objPosArrayList();
     playerPosList->insertHead(temporaryPos);
 
-    playerPosList->insertHead(temporaryPos);
-    playerPosList->insertHead(temporaryPos);
-    playerPosList->insertHead(temporaryPos);
-    playerPosList->insertHead(temporaryPos);
+    // playerPosList->insertHead(temporaryPos);
+    // playerPosList->insertHead(temporaryPos);
+    // playerPosList->insertHead(temporaryPos);
+    // playerPosList->insertHead(temporaryPos);
     
 
 }
@@ -41,7 +41,7 @@ Player::~Player()
 
 // void Player::getPlayerPos(objPos &returnPos)
 
-objPosArrayList* Player :: getPlayerPos()
+objPosArrayList* Player::getPlayerPos()
 {
     // return the reference to the playerPos arrray list
 
@@ -68,8 +68,7 @@ void Player::updatePlayerDir()
             break;
 
         case 'r':
-            // getPlayerPos(playerPos); 
-            // foodRef->generateFood(playerPos);
+            foodRef->generateFood(*playerPosList);
             break;
 
         case 'w':
@@ -105,61 +104,75 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
 
-objPos currHead;
-playerPosList->getHeadElement(currHead);
+    objPos currHead;
+    playerPosList->getHeadElement(currHead);
 
 
 
-if (myDir == UP)
-    {
-        if (currHead.y > 0) 
+
+
+    if (myDir == UP)
         {
-            currHead.y--;
+            if (currHead.y > 0) 
+            {
+                currHead.y--;
+            }
+
+            if (currHead.y==0)
+            {
+                currHead.y= mainGameMechsRef->getBoardSizeY()-2;
+            }
+        }
+        else if (myDir == DOWN)
+        {
+            if (currHead.y < mainGameMechsRef->getBoardSizeY()-1) 
+            {
+                currHead.y++;
+            }
+            if (currHead.y == mainGameMechsRef->getBoardSizeY()-1)
+            {
+                currHead.y=1;
+            }
+        }
+        else if (myDir == LEFT)
+        {
+
+            if (currHead.x > 0) 
+            {
+                currHead.x--;
+            }
+            if (currHead.x==0)
+            {
+                currHead.x= mainGameMechsRef->getBoardSizeX()-2;
+            }
+        }
+        else if (myDir == RIGHT)
+        {
+
+            if (currHead.x < mainGameMechsRef->getBoardSizeX()-1)
+            {
+                currHead.x++;
+            }
+            if (currHead.x== mainGameMechsRef->getBoardSizeX()-1)
+            {
+                currHead.x=1;
+            }
         }
 
-        if (currHead.y==0)
-        {
-            currHead.y= mainGameMechsRef->getBoardSizeY()-2;
-        }
-    }
-    else if (myDir == DOWN)
-    {
-        if (currHead.y < mainGameMechsRef->getBoardSizeY()-1) 
-        {
-            currHead.y++;
-        }
-        if (currHead.y == mainGameMechsRef->getBoardSizeY()-1)
-        {
-            currHead.y=1;
-        }
-    }
-    else if (myDir == LEFT)
-    {
+    checkFoodConsumption();
 
-        if (currHead.x > 0) 
+    if (checkFoodConsumption())
         {
-            currHead.x--;
+            //playerPosList->insertHead(currHead);
+            increasePlayerLength();
+            mainGameMechsRef->incrementScore();
+            foodRef->generateFood(*playerPosList);
         }
-        if (currHead.x==0)
+        else
         {
-            currHead.x= mainGameMechsRef->getBoardSizeX()-2;
+            playerPosList->insertHead(currHead);
+            playerPosList->removeTail();
         }
-    }
-    else if (myDir == RIGHT)
-    {
-
-        if (currHead.x < mainGameMechsRef->getBoardSizeX()-1)
-        {
-            currHead.x++;
-        }
-        if (currHead.x== mainGameMechsRef->getBoardSizeX()-1)
-        {
-            currHead.x=1;
-        }
-    }
-
-playerPosList->insertHead(currHead);
-playerPosList->removeTail();
 // if (myDir == UP)
 //     {
 //         if (playerPos.y > 0) 
@@ -210,3 +223,21 @@ playerPosList->removeTail();
 
 }
 
+bool Player::checkFoodConsumption()
+{
+    objPos currHead;
+    playerPosList->getHeadElement(currHead); 
+
+    objPos foodPos;
+    foodRef->getFoodPos(foodPos);
+
+    return (currHead.x == foodPos.x && currHead.y == foodPos.y);
+        
+}
+
+void Player::increasePlayerLength()
+{       
+    objPos newHead;
+    playerPosList->getHeadElement(newHead);
+    playerPosList->insertHead(newHead);
+}

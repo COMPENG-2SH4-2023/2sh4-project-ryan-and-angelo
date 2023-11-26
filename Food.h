@@ -6,6 +6,7 @@
 
 #include "objPos.h"
 #include "GameMechs.h"
+#include "objPosArrayList.h"
 
 
 
@@ -20,7 +21,7 @@ class Food
         Food(GameMechs* foodGM);
         ~Food();
 
-        void generateFood(objPos blockOff);
+        void generateFood(objPosArrayList& blockOff);
         void getFoodPos(objPos &returnPos);
 
 };
