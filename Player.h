@@ -30,6 +30,7 @@ class Player
         void movePlayer();
         bool checkFoodConsumption();
         void increasePlayerLength();
+        bool checkSelfCollision();
 
     private:
     

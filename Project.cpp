@@ -70,6 +70,12 @@ void RunLogic(void)
     myPlayer->movePlayer();
 
     myGM->clearInput();
+
+    // if (myPlayer->checkSelfCollision()) 
+    // {
+    //     myGM->setLoseFlag();
+    //     myGM->setExitTrue();
+    // } 
 }
 
 void DrawScreen(void)
@@ -124,6 +130,15 @@ void DrawScreen(void)
         MacUILib_printf("\n");
     }
 
+    MacUILib_printf("Score: %d\n", myGM->getScore());
+    if (myGM->getExitFlagStatus())
+    {
+        MacUILib_printf("End Game\n");
+    }
+    if (myGM->getExitFlagStatus() && myGM->getLoseFlagStatus())
+    {
+        MacUILib_printf("You Lose!");
+    }
 
 
     // MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);

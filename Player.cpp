@@ -159,12 +159,19 @@ void Player::movePlayer()
             }
         }
 
-    checkFoodConsumption();
-
+    if (checkSelfCollision()) 
+    {
+        mainGameMechsRef->setLoseFlag();
+        mainGameMechsRef->setExitTrue();
+    } 
+    else 
+    {
+        checkFoodConsumption();
+    }
     if (checkFoodConsumption())
         {
-            //playerPosList->insertHead(currHead);
-            increasePlayerLength();
+            playerPosList->insertHead(currHead);
+            //increasePlayerLength();
             mainGameMechsRef->incrementScore();
             foodRef->generateFood(*playerPosList);
         }
@@ -240,4 +247,22 @@ void Player::increasePlayerLength()
     objPos newHead;
     playerPosList->getHeadElement(newHead);
     playerPosList->insertHead(newHead);
+}
+
+bool Player::checkSelfCollision()
+{
+    objPos currHead;
+    playerPosList->getHeadElement(currHead);
+
+    
+    for (int i = 1; i < playerPosList->getSize(); i++) {
+        objPos tempPos;
+        playerPosList->getElement(tempPos, i);
+
+        if (currHead.x == tempPos.x && currHead.y == tempPos.y) {
+            return true;
+        }
+    }
+
+    return false;
 }
