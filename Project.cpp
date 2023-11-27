@@ -87,7 +87,7 @@ void DrawScreen(void)
     // objPos tempPos;
     // myPlayer->getPlayerPos(tempPos);
 
-    objPosArrayList* playerBody =myPlayer->getPlayerPos();
+    objPosArrayList* playerBody = myPlayer->getPlayerPos();
     objPos tempBody;
 
     objPos foodPos;

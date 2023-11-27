@@ -109,9 +109,14 @@ void Player::movePlayer()
 
 
 
-
-
-    if (myDir == UP)
+    if (checkSelfCollision()) 
+    {
+        mainGameMechsRef->setLoseFlag();
+        mainGameMechsRef->setExitTrue();
+    } 
+    else
+    {
+        if (myDir == UP)
         {
             if (currHead.y > 0) 
             {
@@ -123,7 +128,7 @@ void Player::movePlayer()
                 currHead.y= mainGameMechsRef->getBoardSizeY()-2;
             }
         }
-        else if (myDir == DOWN)
+            else if (myDir == DOWN)
         {
             if (currHead.y < mainGameMechsRef->getBoardSizeY()-1) 
             {
@@ -134,7 +139,7 @@ void Player::movePlayer()
                 currHead.y=1;
             }
         }
-        else if (myDir == LEFT)
+            else if (myDir == LEFT)
         {
 
             if (currHead.x > 0) 
@@ -146,7 +151,7 @@ void Player::movePlayer()
                 currHead.x= mainGameMechsRef->getBoardSizeX()-2;
             }
         }
-        else if (myDir == RIGHT)
+            else if (myDir == RIGHT)
         {
 
             if (currHead.x < mainGameMechsRef->getBoardSizeX()-1)
@@ -159,15 +164,16 @@ void Player::movePlayer()
             }
         }
 
-    if (checkSelfCollision()) 
-    {
-        mainGameMechsRef->setLoseFlag();
-        mainGameMechsRef->setExitTrue();
-    } 
-    else 
-    {
-        checkFoodConsumption();
-    }
+    // if (checkSelfCollision()) 
+    // {
+    //     mainGameMechsRef->setLoseFlag();
+    //     mainGameMechsRef->setExitTrue();
+    // } 
+    // else 
+    // {
+    //     checkFoodConsumption();
+    // }
+    checkFoodConsumption ();
     if (checkFoodConsumption())
         {
             playerPosList->insertHead(currHead);
@@ -180,6 +186,7 @@ void Player::movePlayer()
             playerPosList->insertHead(currHead);
             playerPosList->removeTail();
         }
+    }
 // if (myDir == UP)
 //     {
 //         if (playerPos.y > 0) 
