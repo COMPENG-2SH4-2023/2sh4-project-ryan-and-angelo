@@ -53,7 +53,7 @@ void Initialize(void)
     myPlayer = new Player(myGM, foodGen);
     playerPosList = new objPosArrayList();
 
-    foodGen->generateFood(*playerPosList);
+    foodGen->generateFood(*playerPosList, 5);
     
     // playerPtr = new Player(/* Pass your game mechanics reference here */);
 }
@@ -84,59 +84,65 @@ void DrawScreen(void)
 
     bool drawn;
 
-    // objPos tempPos;
-    // myPlayer->getPlayerPos(tempPos);
-
     objPosArrayList* playerBody = myPlayer->getPlayerPos();
     objPos tempBody;
 
-    objPos foodPos;
-    foodGen->getFoodPos(foodPos);
+    objPosArrayList* foodBucket = foodGen->getFoodBucket();
+    objPos tempFood;
 
-
-
-      
-
+    // Draw player body
     for (int i = 0; i < myGM->getBoardSizeY(); i++) {
         for (int j = 0; j < myGM->getBoardSizeX(); j++) {
             drawn = false;
-            for (int k =0; k < playerBody->getSize(); k++)
-            {
+            for (int k = 0; k < playerBody->getSize(); k++) {
                 playerBody->getElement(tempBody, k);
-                if (tempBody.x==j && tempBody.y==i)
-                {
-                    MacUILib_printf("%c",tempBody.symbol);
+                if (tempBody.x == j && tempBody.y == i) {
+                    MacUILib_printf("%c", tempBody.symbol);
                     drawn = true;
                     break;
                 }
             }
-            
-            if (drawn)
-            {
-                continue;
+
+            // Draw food
+            if (!drawn) {
+                for (int k = 0; k < foodBucket->getSize(); k++) {
+                    foodBucket->getElement(tempFood, k);
+                    if (tempFood.x == j && tempFood.y == i) {
+                        if (tempFood.isSpecial1) 
+                        {
+                            MacUILib_printf("%c", tempFood.symbol);  // Change this to the symbol for special food 1
+                        } 
+                        else if (tempFood.isSpecial2) 
+                        {
+                            MacUILib_printf("%c", tempFood.symbol);  // Change this to the symbol for special food 2
+                        } 
+                        else 
+                        {
+                            MacUILib_printf("%c", tempFood.symbol);
+                        }
+                        drawn = true;
+                        break;
+                    }
+                }
             }
 
-            if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) {
-                MacUILib_printf("#");
-            }
-            
-            else if (i == foodPos.y && j == foodPos.x) {
-                MacUILib_printf("%c", foodPos.symbol);
-            }
-            else {
-                MacUILib_printf(" ");
+            // Draw borders
+            if (!drawn) {
+                if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) {
+                    MacUILib_printf("#");
+                } else {
+                    MacUILib_printf(" ");
+                }
             }
         }
         MacUILib_printf("\n");
     }
 
     MacUILib_printf("Score: %d\n", myGM->getScore());
-    if (myGM->getExitFlagStatus())
-    {
+    if (myGM->getExitFlagStatus()) {
         MacUILib_printf("End Game\n");
     }
-    if (myGM->getExitFlagStatus() && myGM->getLoseFlagStatus())
-    {
+    if (myGM->getExitFlagStatus() && myGM->getLoseFlagStatus()) {
         MacUILib_printf("You Lose!");
     }
 

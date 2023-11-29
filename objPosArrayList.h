@@ -11,6 +11,7 @@ class objPosArrayList
         objPos* aList;
         int listSize;
         int arrayCapacity;
+        objPosArrayList* foodBucket;
 
     public:
         objPosArrayList();
@@ -21,7 +22,8 @@ class objPosArrayList
         void insertTail(objPos thisPos);
         void removeHead();
         void removeTail();
-        
+        void clear();
+
         void getHeadElement(objPos &returnPos);
         void getTailElement(objPos &returnPos);
         void getElement(objPos &returnPos, int index);

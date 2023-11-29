@@ -100,3 +100,8 @@ void objPosArrayList::getElement(objPos &returnPos, int index)
     aList[index].getObjPos(returnPos);
     
 }
+
+void objPosArrayList::clear() 
+{
+    listSize = 0;
+}

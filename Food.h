@@ -13,16 +13,21 @@
 class Food
 {
     private:
-        objPos foodPos;
+        // objPos foodPos;
         GameMechs* foodGame;
+        objPosArrayList* foodBucket;
 
     public:
         Food();
         Food(GameMechs* foodGM);
         ~Food();
 
-        void generateFood(objPosArrayList& blockOff);
-        void getFoodPos(objPos &returnPos);
+        void generateFood(objPosArrayList& blockOff, int numFoods);
+        void getFoodPos(objPos& returnPos);
+        void noIncreaseFood();
+        void pointsLongSnake();
+        bool checkFoodCollision(objPos& headPos);
+        objPosArrayList* getFoodBucket();
 
 };
 

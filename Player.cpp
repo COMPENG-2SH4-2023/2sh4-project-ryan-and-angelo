@@ -68,7 +68,7 @@ void Player::updatePlayerDir()
             break;
 
         case 'r':
-            foodRef->generateFood(*playerPosList);
+            foodRef->generateFood(*playerPosList, 5);
             break;
 
         case 'w':
@@ -173,13 +173,13 @@ void Player::movePlayer()
     // {
     //     checkFoodConsumption();
     // }
-    checkFoodConsumption ();
-    if (checkFoodConsumption())
+    foodRef->checkFoodCollision(currHead);
+    if (foodRef->checkFoodCollision(currHead))
         {
             playerPosList->insertHead(currHead);
             //increasePlayerLength();
             mainGameMechsRef->incrementScore();
-            foodRef->generateFood(*playerPosList);
+            foodRef->generateFood(*playerPosList, 5);
         }
         else
         {
@@ -237,23 +237,44 @@ void Player::movePlayer()
 
 }
 
-bool Player::checkFoodConsumption()
-{
-    objPos currHead;
-    playerPosList->getHeadElement(currHead); 
+// bool Player::checkFoodConsumption()
+// {
+//     objPos currHead;
+//     playerPosList->getHeadElement(currHead); 
 
-    objPos foodPos;
-    foodRef->getFoodPos(foodPos);
+//     // objPos foodPos;
+//     // foodRef->getFoodPos(foodPos);
 
-    return (currHead.x == foodPos.x && currHead.y == foodPos.y);
+//     // return (currHead.x == foodPos.x && currHead.y == foodPos.y);
+
+//     for (int i = 0; i < foodBucket->getSize(); i++) {
+//         objPos tempPos;
+//         foodBucket->getElement(tempPos, i);
+//         if (currHead.x == tempPos.x && currHead.y == tempPos.y) {
+//             return true;  
+//         }
+//     }
+//     return false;
         
-}
+// }
 
 void Player::increasePlayerLength()
 {       
     objPos newHead;
+    objPos newFood;
     playerPosList->getHeadElement(newHead);
-    playerPosList->insertHead(newHead);
+    if (foodRef->checkFoodCollision(newHead)) {
+        if (newFood.isSpecial1 == true) {
+            for (int i = 0; i < 9; ++i) {
+                playerPosList->insertHead(newHead);
+            }
+        }
+        else 
+        {
+            playerPosList->insertHead(newHead);
+        }
+    }
+
 }
 
 bool Player::checkSelfCollision()

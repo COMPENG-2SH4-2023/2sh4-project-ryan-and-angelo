@@ -7,6 +7,8 @@ class objPos
         int x;
         int y;
         char symbol;
+        bool isSpecial1;
+        bool isSpecial2;
 
         objPos();
         objPos(objPos &o); // copy constructor
