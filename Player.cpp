@@ -109,6 +109,7 @@ void Player::movePlayer()
 
 
 
+
     if (checkSelfCollision()) 
     {
         mainGameMechsRef->setLoseFlag();
@@ -163,19 +164,57 @@ void Player::movePlayer()
                 currHead.x=1;
             }
         }
+    // foodRef->checkFoodCollision(currHead);
+    // if (foodRef->checkFoodCollision(currHead))
+    //     {
+    //         playerPosList->insertHead(currHead);
+    //         // increasePlayerLength();
+    //         mainGameMechsRef->incrementScore();
+    //         foodRef->generateFood(*playerPosList, 5);
+    //     }
+    //     else
+    //     {
+    //         playerPosList->insertHead(currHead);
+    //         playerPosList->removeTail();
+    //     }
+
     foodRef->checkFoodCollision(currHead);
-    if (foodRef->checkFoodCollision(currHead))
-        {
-            playerPosList->insertHead(currHead);
-            // increasePlayerLength();
-            mainGameMechsRef->incrementScore();
-            foodRef->generateFood(*playerPosList, 5);
+    int collisionResult = foodRef->getFoodSymbol(currHead);
+
+    if (collisionResult == 2) {
+    
+        playerPosList->insertHead(currHead);
+
+        objPos currTail;
+        playerPosList->getTailElement(currTail);
+ 
+        for (int h=0; h<5;h++)
+        {   mainGameMechsRef->incrementScore();
+            playerPosList->insertTail(currTail);
         }
-        else
-        {
-            playerPosList->insertHead(currHead);
-            playerPosList->removeTail();
-        }
+
+        foodRef->generateFood(*playerPosList, 5);
+    }   
+
+    else if (collisionResult == 3) {
+        playerPosList->insertHead(currHead);
+
+        mainGameMechsRef->incrementScore();
+        foodRef->generateFood(*playerPosList, 5);
+    }   
+
+    else if (collisionResult == 1){
+    playerPosList->insertHead(currHead);
+
+    for (int j=0; j<10; j++)
+    {   mainGameMechsRef->incrementScore();
+    }
+    foodRef->generateFood(*playerPosList, 5);
+    }
+    else {
+        playerPosList->insertHead(currHead);
+        playerPosList->removeTail();
+    }
     }
 
 }
