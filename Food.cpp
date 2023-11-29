@@ -112,18 +112,19 @@ void Food::getFoodPos(objPos& returnPos)
 
 void Food::noIncreaseFood()
 {   
-    int i=0;
-    while (i < 9)
-    {
-        foodGame->incrementScore();
-        i++;
-    }
+    foodGame->incrementScore();
+    // int i=0;
+    // while (i < 4)
+    // {
+    //     foodGame->incrementScore();
+    //     i++;
+    // }
 }
 
 void Food::pointsLongSnake()
 {
-    int i=0,j=0;
-    while (i < 4)
+    int i=0;
+    while (i < 5)
     {
         foodGame->incrementScore();
         i++;
@@ -138,12 +139,12 @@ void Food::pointsLongSnake()
         foodBucket->getElement(newFood, i);
         if (headPos.x == newFood.x && headPos.y == newFood.y) 
         {
-            if (newFood.isSpecial2 == true) 
+            if (newFood.symbol == 'q') 
             {
                 noIncreaseFood();
                 return true;  
             } 
-            else if (newFood.isSpecial1 == true)
+            else if (newFood.symbol == 'l')
             {
                 pointsLongSnake();
                 return true;

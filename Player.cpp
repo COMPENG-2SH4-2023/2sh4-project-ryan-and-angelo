@@ -163,21 +163,11 @@ void Player::movePlayer()
                 currHead.x=1;
             }
         }
-
-    // if (checkSelfCollision()) 
-    // {
-    //     mainGameMechsRef->setLoseFlag();
-    //     mainGameMechsRef->setExitTrue();
-    // } 
-    // else 
-    // {
-    //     checkFoodConsumption();
-    // }
     foodRef->checkFoodCollision(currHead);
     if (foodRef->checkFoodCollision(currHead))
         {
             playerPosList->insertHead(currHead);
-            //increasePlayerLength();
+            // increasePlayerLength();
             mainGameMechsRef->incrementScore();
             foodRef->generateFood(*playerPosList, 5);
         }
@@ -187,53 +177,6 @@ void Player::movePlayer()
             playerPosList->removeTail();
         }
     }
-// if (myDir == UP)
-//     {
-//         if (playerPos.y > 0) 
-//         {
-//             playerPos.y--;
-//         }
-
-//         if (playerPos.y==0)
-//         {
-//             playerPos.y= mainGameMechsRef->getBoardSizeY()-2;
-//         }
-//     }
-//     else if (myDir == DOWN)
-//     {
-//         if (playerPos.y < mainGameMechsRef->getBoardSizeY()-1) 
-//         {
-//             playerPos.y++;
-//         }
-//         if (playerPos.y == mainGameMechsRef->getBoardSizeY()-1)
-//         {
-//             playerPos.y=1;
-//         }
-//     }
-//     else if (myDir == LEFT)
-//     {
-
-//         if (playerPos.x > 0) 
-//         {
-//             playerPos.x--;
-//         }
-//         if (playerPos.x==0)
-//         {
-//             playerPos.x= mainGameMechsRef->getBoardSizeX()-2;
-//         }
-//     }
-//     else if (myDir == RIGHT)
-//     {
-
-//         if (playerPos.x < mainGameMechsRef->getBoardSizeX()-1)
-//         {
-//             playerPos.x++;
-//         }
-//         if (playerPos.x== mainGameMechsRef->getBoardSizeX()-1)
-//         {
-//             playerPos.x=1;
-//         }
-//     }
 
 }
 
@@ -260,21 +203,34 @@ void Player::movePlayer()
 
 void Player::increasePlayerLength()
 {       
+    // objPos newHead;
+    // objPos newFood;
+    // playerPosList->getHeadElement(newHead);
+    // if (foodRef->checkFoodCollision(newHead)) {
+    //     if (newFood.isSpecial1 == true) {
+    //         for (int i = 0; i < 9; ++i) {
+    //             playerPosList->insertHead(newHead);
+    //         }
+    //     }
+    //     else 
+    //     {
+    //         playerPosList->insertHead(newHead);
+    //     }
+    // }
     objPos newHead;
-    objPos newFood;
     playerPosList->getHeadElement(newHead);
+
     if (foodRef->checkFoodCollision(newHead)) {
-        if (newFood.isSpecial1 == true) {
+        objPos newFood;
+        foodRef->getFoodPos(newFood);
+        if (newFood.symbol == 'l') {
             for (int i = 0; i < 9; ++i) {
                 playerPosList->insertHead(newHead);
             }
-        }
-        else 
-        {
+        } else {
             playerPosList->insertHead(newHead);
         }
     }
-
 }
 
 bool Player::checkSelfCollision()
