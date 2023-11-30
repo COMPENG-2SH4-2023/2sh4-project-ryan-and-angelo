@@ -82,7 +82,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
 
         foodBucket->insertHead(newFood);
         count++;
-        if (count >= numFoods - numSpecialFoods)
+        if (count > numFoods - numSpecialFoods)
         {
             Special1 = rand () % 2;
 
