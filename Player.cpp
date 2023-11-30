@@ -178,45 +178,55 @@ void Player::movePlayer()
     //         playerPosList->removeTail();
     //     }
 
-    foodRef->checkFoodCollision(currHead);
-    int collisionResult = foodRef->getFoodSymbol(currHead);
+    if (foodRef->checkFoodCollision(currHead))
+    {
+        int collisionResult = foodRef->getFoodSymbol(currHead);
 
-    if (collisionResult == 2) {
-    
+        if (collisionResult == 1){
         playerPosList->insertHead(currHead);
 
-        objPos currTail;
-        playerPosList->getTailElement(currTail);
- 
-        for (int h=0; h<5;h++)
+        for (int j=0; j<10; j++)
         {   mainGameMechsRef->incrementScore();
-            playerPosList->insertTail(currTail);
+        }
+        foodRef->generateFood(*playerPosList, 5);
         }
 
-        foodRef->generateFood(*playerPosList, 5);
-    }   
+        else if (collisionResult == 2) {
+    
+            playerPosList->insertHead(currHead);
+            mainGameMechsRef->incrementScore();
+            objPos currTail;
+            playerPosList->getTailElement(currTail);
+ 
+            for (int h=0; h<4;h++)
+            {   mainGameMechsRef->incrementScore();
+                playerPosList->insertTail(currTail);
+            }
 
-    else if (collisionResult == 3) {
-        playerPosList->insertHead(currHead);
+            foodRef->generateFood(*playerPosList, 5);
+        }   
 
-        mainGameMechsRef->incrementScore();
-        foodRef->generateFood(*playerPosList, 5);
-    }   
+        else {
+            playerPosList->insertHead(currHead);
 
-    else if (collisionResult == 1){
-    playerPosList->insertHead(currHead);
+            mainGameMechsRef->incrementScore();
+            foodRef->generateFood(*playerPosList, 5);
+        }   
 
-    for (int j=0; j<10; j++)
-    {   mainGameMechsRef->incrementScore();
-    }
-    foodRef->generateFood(*playerPosList, 5);
+        // else if (collisionResult == 1){
+        // playerPosList->insertHead(currHead);
+
+        // for (int j=0; j<10; j++)
+        // {   mainGameMechsRef->incrementScore();
+        // }
+        // foodRef->generateFood(*playerPosList, 5);
+        // }
     }
     else {
         playerPosList->insertHead(currHead);
         playerPosList->removeTail();
     }
     }
-
 }
 
 // bool Player::checkFoodConsumption()

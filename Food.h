@@ -24,8 +24,6 @@ class Food
 
         void generateFood(objPosArrayList& blockOff, int numFoods);
         void getFoodPos(objPos& returnPos);
-        // void noIncreaseFood();
-        // void pointsLongSnake();
         bool checkFoodCollision(objPos& headPos);
         int getFoodSymbol(objPos& headPos);
         objPosArrayList* getFoodBucket();

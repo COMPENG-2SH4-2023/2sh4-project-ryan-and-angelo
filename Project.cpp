@@ -146,30 +146,6 @@ void DrawScreen(void)
         MacUILib_printf("You Lose!");
     }
 
-
-    // MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d , %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
-
-
-    // for (int i = 0; i < myGM->getBoardSizeY(); i++) {
-    //     for (int j = 0; j < myGM->getBoardSizeX(); j++) {
-    //         if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) {
-    //             MacUILib_printf("#");
-    //         }
-    //         else if (i == tempPos.y && j == tempPos.x) {
-    //             MacUILib_printf("%c", tempPos.getSymbol());
-    //         }
-    //         else if (i == foodPos.y && j == foodPos.x) {
-    //             MacUILib_printf("%c", foodPos.symbol);
-    //         }
-    //         else {
-    //             MacUILib_printf(" ");
-    //         }
-    //     }
-    //     MacUILib_printf("\n");
-    // }
-
-
-
 }
 
 void LoopDelay(void)

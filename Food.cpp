@@ -110,28 +110,6 @@ void Food::getFoodPos(objPos& returnPos)
     foodBucket->getHeadElement(returnPos);
 }
 
-// void Food::noIncreaseFood()
-// {   
-//     foodGame->incrementScore();
-//     // int i=0;
-//     // while (i < 4)
-//     // {
-//     //     foodGame->incrementScore();
-//     //     i++;
-//     // }
-// }
-
-// void Food::pointsLongSnake()
-// {
-//     int i=0;
-//     while (i < 5)
-//     {
-//         foodGame->incrementScore();
-//         i++;
-//     }
-    
-//  }
-
  bool Food::checkFoodCollision(objPos& headPos)
  {
     for (int i = 0; i < foodBucket->getSize(); i++) {
@@ -141,20 +119,6 @@ void Food::getFoodPos(objPos& returnPos)
         {
 
             return true;
-            // if (newFood.symbol == 'q') 
-            // {
-            //     noIncreaseFood();
-            //     return true;  
-            // } 
-            // else if (newFood.symbol == 'l')
-            // {
-            //     // pointsLongSnake();
-            //     return true;
-            // }
-            // else 
-            // {
-            //     return true;  
-            // }
         }
     }
     return false;
@@ -179,10 +143,6 @@ int Food ::getFoodSymbol(objPos& headPos)
             else if (newFood.symbol == 'l')
             {
                 return 2;
-            }
-            else 
-            {
-                return 3;  
             }
         }
     }
