@@ -28,8 +28,6 @@ class Player
         // void getPlayerPos(objPos &returnPos); // Upgrade this in iteration 3.
         void updatePlayerDir();
         void movePlayer();
-        //bool checkFoodConsumption();
-        void increasePlayerLength();
         bool checkSelfCollision();
 
     private:

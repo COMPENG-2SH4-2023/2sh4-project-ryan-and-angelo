@@ -32,34 +32,41 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
 
     // Clear the food bucket
     foodBucket->clear();
-    int count =0;
+
     int Special1;
+    int count = 0;
 
     int numSpecialFoods = rand() % 2 + 1;  // Generate 1 or 2 special foods
-    for (int i = 0; i < numFoods; ++i) {
+    for (int i = 0; i < numFoods; ++i) 
+    {
         int candidateX, candidateY;
         int overlap = 1;
 
-        while (overlap) {
+        while (overlap) 
+        {
             candidateX = rand() % (foodGame->getBoardSizeX() - 2) + 1;
             candidateY = rand() % (foodGame->getBoardSizeY() - 2) + 1;
 
             overlap = false;
 
-            for (int j = 0; j < blockOff.getSize(); j++) {
+            for (int j = 0; j < blockOff.getSize(); j++) 
+            {
                 objPos tempPos;
                 blockOff.getElement(tempPos, j);
-                if (candidateX == tempPos.x && candidateY == tempPos.y) {
+                if (candidateX == tempPos.x && candidateY == tempPos.y) 
+                {
                     overlap = true;
                     break;
                 }
             }
 
             // Check for overlap with the Food Bucket
-            for (int j = 0; j < foodBucket->getSize(); j++) {
+            for (int j = 0; j < foodBucket->getSize(); j++) 
+            {
                 objPos tempPos;
                 foodBucket->getElement(tempPos, j);
-                if (candidateX == tempPos.x && candidateY == tempPos.y) {
+                if (candidateX == tempPos.x && candidateY == tempPos.y) 
+                {
                     overlap = true;
                     break;
                 }
@@ -78,6 +85,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
         if (count >= numFoods - numSpecialFoods)
         {
             Special1 = rand () % 2;
+
              if (Special1)
                 {
                     objPos newFood;
@@ -106,23 +114,22 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
 
 void Food::getFoodPos(objPos& returnPos)
 {
-    // returnPos.setObjPos(foodPos.x, foodPos.y, foodPos.symbol);
     foodBucket->getHeadElement(returnPos);
 }
 
- bool Food::checkFoodCollision(objPos& headPos)
- {
-    for (int i = 0; i < foodBucket->getSize(); i++) {
+bool Food::checkFoodCollision(objPos& headPos)
+{
+    for (int i = 0; i < foodBucket->getSize(); i++)
+    {
         objPos newFood;
         foodBucket->getElement(newFood, i);
         if (headPos.x == newFood.x && headPos.y == newFood.y) 
         {
-
             return true;
         }
     }
     return false;
- }
+}
 
 objPosArrayList* Food::getFoodBucket()
 {
@@ -130,8 +137,9 @@ objPosArrayList* Food::getFoodBucket()
 }
 
 int Food ::getFoodSymbol(objPos& headPos)
- {
-    for (int i = 0; i < foodBucket->getSize(); i++) {
+{
+    for (int i = 0; i < foodBucket->getSize(); i++) 
+    {
         objPos newFood;
         foodBucket->getElement(newFood, i);
         if (headPos.x == newFood.x && headPos.y == newFood.y) 
@@ -147,4 +155,4 @@ int Food ::getFoodSymbol(objPos& headPos)
         }
     }
     return 0;
- }
+}
