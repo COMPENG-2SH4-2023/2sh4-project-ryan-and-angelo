@@ -25,7 +25,7 @@ class Food
         void generateFood(objPosArrayList& blockOff, int numFoods);
         void getFoodPos(objPos& returnPos);
         bool checkFoodCollision(objPos& headPos);
-        int getFoodSymbol(objPos& headPos);
+        int CheckSpecialFoodCollision(objPos& headPos);
         objPosArrayList* getFoodBucket();
 
 };

@@ -13,7 +13,7 @@ using namespace std;
 GameMechs* myGM;
 Player* myPlayer;
 Food* foodGen;
-objPosArrayList* playerPosList;
+objPosArrayList* playerPosList; //Initialization
 
 void Initialize(void);
 void GetInput(void);
@@ -46,19 +46,19 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    myGM = new GameMechs(30, 15); // make the board size 30x15
-    foodGen = new Food(myGM);
-    myPlayer = new Player(myGM, foodGen);
-    playerPosList = new objPosArrayList();
+    myGM = new GameMechs(30, 15); //Boardsize
+    foodGen = new Food(myGM); //Food
+    myPlayer = new Player(myGM, foodGen); 
+    playerPosList = new objPosArrayList(); //Allocating memory onto the heap for desired instances of classes for the boardsize, food, player, and player list
 
-    foodGen->generateFood(*playerPosList, 5);
+    foodGen->generateFood(*playerPosList, 5); //Generating Foods onto the board
     
     // playerPtr = new Player(/* Pass your game mechanics reference here */);
 }
 
 void GetInput(void)
 {
-   myGM->getInput();
+   myGM->getInput(); //Get player input
 }
 
 void RunLogic(void)
@@ -67,7 +67,7 @@ void RunLogic(void)
 
     myPlayer->movePlayer();
 
-    myGM->clearInput();
+    myGM->clearInput(); //Running player movement and collsion logic dependent on player input, then clearing input for next iteration
 
 }
 
@@ -75,58 +75,59 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();
 
-    bool drawn;
+    bool drawn; //Setting variable drawn to check to see if another item has already been printed at a board location
 
     objPosArrayList* playerBody = myPlayer->getPlayerPos();
-    objPos tempBody;
+    objPos tempBody; //Getting Player Position
 
     objPosArrayList* foodBucket = foodGen->getFoodBucket();
-    objPos tempFood;
+    objPos tempFood; //Getting Food Position
 
-    // Draw player body
-    for (int i = 0; i < myGM->getBoardSizeY(); i++)
+    for (int i = 0; i < myGM->getBoardSizeY(); i++) 
     {
-        for (int j = 0; j < myGM->getBoardSizeX(); j++) 
+        for (int j = 0; j < myGM->getBoardSizeX(); j++) //Looping through the bound's of the game board
         {
             drawn = false;
 
-            for (int k = 0; k < playerBody->getSize(); k++) 
+            for (int k = 0; k < playerBody->getSize(); k++) //Checking player position's
             {
-                playerBody->getElement(tempBody, k);
+                playerBody->getElement(tempBody, k); //Getting player position's
 
-                if (tempBody.x == j && tempBody.y == i) 
+                if (tempBody.x == j && tempBody.y == i) //Checking if current board position aligns with player position
                 {
-                    MacUILib_printf("%c", tempBody.symbol);
-                    drawn = true;
-                    break;
+                    MacUILib_printf("%c", tempBody.symbol); //Printing the player position
+
+                    drawn = true; //Something was drawn at this index
+
+                    break; //Go to next check
                 }
             }
 
             // Draw food
-            if (!drawn) 
+            if (!drawn) // Check if another item has  been drawn at this index
             {
-                for (int k = 0; k < foodBucket->getSize(); k++) 
+                for (int k = 0; k < foodBucket->getSize(); k++) //Loop through food's
                 {
-                    foodBucket->getElement(tempFood, k);
+                    foodBucket->getElement(tempFood, k); //Get the food position
 
-                    if (tempFood.x == j && tempFood.y == i) 
+                    if (tempFood.x == j && tempFood.y == i) //Check if the food position aligns with the current board index
                     {
-                        if (tempFood.isSpecial1) 
+                        if (tempFood.isSpecial1) // Bonus:Check if food is the first type of special food
                         {
                             MacUILib_printf("%c", tempFood.symbol);  // Change this to the symbol for special food 1
                         } 
 
-                        else if (tempFood.isSpecial2) 
+                        else if (tempFood.isSpecial2) //Check if food is the second type of special food
                         {
                             MacUILib_printf("%c", tempFood.symbol);  // Change this to the symbol for special food 2
                         } 
 
                         else 
                         {
-                            MacUILib_printf("%c", tempFood.symbol);
+                            MacUILib_printf("%c", tempFood.symbol); //Otherwise print the base food type
                         }
 
-                        drawn = true;
+                        drawn = true; //Element has been printed
                         break;
                     }
                 }
@@ -137,27 +138,27 @@ void DrawScreen(void)
             {
                 if (i == 0 || i == myGM->getBoardSizeY() - 1 || j == 0 || j == myGM->getBoardSizeX() - 1) 
                 {
-                    MacUILib_printf("#");
+                    MacUILib_printf("#"); //If we are at a border value, print #
                 } 
                 else
                 {
-                    MacUILib_printf(" ");
+                    MacUILib_printf(" "); //If none of the other items have been printed,print a blank space
                 }
             }
         }
-        MacUILib_printf("\n");
+        MacUILib_printf("\n"); //Print newline for future statements
     }
 
-    MacUILib_printf("Score: %d\n", myGM->getScore());
-    
+    MacUILib_printf("Score: %d\n", myGM->getScore()); // Printing current score
+
     if (myGM->getExitFlagStatus()) 
     {
-        MacUILib_printf("End Game\n");
+        MacUILib_printf("End Game\n"); //Printing End Game if program has been terminated
     }
 
     if (myGM->getExitFlagStatus() && myGM->getLoseFlagStatus()) 
     {
-        MacUILib_printf("You Lose!");
+        MacUILib_printf("You Lose!"); //Printing you Lose if game is over due to loss (player collision)
     }
 
 }
@@ -170,10 +171,10 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    //MacUILib_clearScreen();    
+    //MacUILib_clearScreen(); Commented out so that end game screen can still be seen
     delete foodGen;
     delete playerPosList;
     delete myGM;
-    delete myPlayer;
+    delete myPlayer;  // Deallocating memory in all areas that created memory on the heap
     MacUILib_uninit();
 }

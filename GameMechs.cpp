@@ -6,7 +6,7 @@ GameMechs::GameMechs()
     input = 0;
     exitFlag = false;
     boardSizeX = 30;
-    boardSizeY = 15;
+    boardSizeY = 15; //Initialization
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -15,10 +15,10 @@ GameMechs::GameMechs(int boardX, int boardY)
     score = 0;
     exitFlag = false;
     boardSizeX = boardX;
-    boardSizeY = boardY;
+    boardSizeY = boardY; //Initialization
 }
 
-// do you need a destructor?
+// do you need a destructor? No, there is no memory allocated
 GameMechs::~GameMechs()
 {
 
@@ -52,7 +52,7 @@ char GameMechs::getInput()
         input = MacUILib_getChar();
     }
 
-    return input;
+    return input; //Getting input
 }
 
 int GameMechs::getBoardSizeX()
