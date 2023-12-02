@@ -75,10 +75,11 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
             }
         }
 
+        // Basic food 
         objPos newFood; 
         newFood.x = candidateX;
         newFood.y = candidateY;
-        newFood.symbol = 'w'; //If no overlap assign food to that location with base food type 'w'
+        newFood.symbol = 'o'; //If no overlap assign food to that location with base food type 'o'
         
           
 
@@ -96,7 +97,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
                     newFood.x = candidateX;
                     newFood.y = candidateY;
 
-                    newFood.symbol = 'l'; //Assign food position and character symbol to 'l'
+                    newFood.symbol = '*'; //Assign food position and character symbol to '*'
 
                     newFood.isSpecial1 = true; // Assigning this character to true for printing logic
 
@@ -110,7 +111,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
                 newFood.x = candidateX;
                 newFood.y = candidateY;
 
-                newFood.symbol = 'q'; //Assign food position and character symbol to 'q'
+                newFood.symbol = '+'; //Assign food position and character symbol to '+'
 
                 newFood.isSpecial2 = true; // Assigning this character to true for printing logic
 
@@ -155,13 +156,13 @@ int Food ::CheckSpecialFoodCollision(objPos& headPos)
         foodBucket->getElement(newFood, i);
         if (headPos.x == newFood.x && headPos.y == newFood.y) // BONUS: Same collision logic as checkFoodCollision
         {
-            if (newFood.symbol == 'q') 
+            if (newFood.symbol == '*') 
             {
-                return 1;  //Returning 1 if special character 'q' is found
+                return 1;  //Returning 1 if special character '*' is found
             } 
-            else if (newFood.symbol == 'l')
+            else if (newFood.symbol == '+')
             {
-                return 2; //Returning 2 if special character 'l' is found
+                return 2; //Returning 2 if special character '+' is found
             }
         }
     }

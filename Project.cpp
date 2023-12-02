@@ -10,10 +10,11 @@ using namespace std;
 
 #define DELAY_CONST 100000
 
+//Refrences to classes
 GameMechs* myGM;
 Player* myPlayer;
 Food* foodGen;
-objPosArrayList* playerPosList; //Initialization
+objPosArrayList* playerPosList; 
 
 void Initialize(void);
 void GetInput(void);
@@ -28,7 +29,7 @@ int main(void)
 
     Initialize();
 
-    while(myGM->getExitFlagStatus() == false)  
+    while(myGM->getExitFlagStatus() == false)  // ExitFlag call
     {
         GetInput();
         RunLogic();
@@ -46,14 +47,13 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
+    //Allocating memory onto the heap for desired instances of classes for the boardsize, food, player, and player list
     myGM = new GameMechs(30, 15); //Boardsize
     foodGen = new Food(myGM); //Food
     myPlayer = new Player(myGM, foodGen); 
-    playerPosList = new objPosArrayList(); //Allocating memory onto the heap for desired instances of classes for the boardsize, food, player, and player list
+    playerPosList = new objPosArrayList(); 
 
     foodGen->generateFood(*playerPosList, 5); //Generating Foods onto the board
-    
-    // playerPtr = new Player(/* Pass your game mechanics reference here */);
 }
 
 void GetInput(void)
@@ -77,11 +77,11 @@ void DrawScreen(void)
 
     bool drawn; //Setting variable drawn to check to see if another item has already been printed at a board location
 
-    objPosArrayList* playerBody = myPlayer->getPlayerPos();
-    objPos tempBody; //Getting Player Position
+    objPosArrayList* playerBody = myPlayer->getPlayerPos(); //Getting Player Position
+    objPos tempBody; 
 
-    objPosArrayList* foodBucket = foodGen->getFoodBucket();
-    objPos tempFood; //Getting Food Position
+    objPosArrayList* foodBucket = foodGen->getFoodBucket(); //Getting Food Position
+    objPos tempFood; 
 
     for (int i = 0; i < myGM->getBoardSizeY(); i++) 
     {
@@ -151,9 +151,19 @@ void DrawScreen(void)
 
     MacUILib_printf("Score: %d\n", myGM->getScore()); // Printing current score
 
+    // Game Instructions for different food values
+    MacUILib_printf("'o' -> Score: +1, Length: +1\n");
+    MacUILib_printf("'*' -> Score: +10, Length: +0\n");
+    MacUILib_printf("'+' -> Score: +5, Length: +10\n");
+
+    if(!myGM->getExitFlagStatus())
+    {
+        MacUILib_printf("\nPress SPACEBAR to End Game"); // End Game Instuctions
+    }
+
     if (myGM->getExitFlagStatus()) 
     {
-        MacUILib_printf("End Game\n"); //Printing End Game if program has been terminated
+        MacUILib_printf("\nEnd Game\n"); //Printing End Game if program has been terminated
     }
 
     if (myGM->getExitFlagStatus() && myGM->getLoseFlagStatus()) 

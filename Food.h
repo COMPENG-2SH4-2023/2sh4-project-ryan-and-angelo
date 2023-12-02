@@ -13,7 +13,6 @@
 class Food
 {
     private:
-        // objPos foodPos;
         GameMechs* foodGame;
         objPosArrayList* foodBucket;
 
