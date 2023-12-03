@@ -9,4 +9,4 @@ Section: L06
 
 MacID: calicchr, turcoa3
 
-StudentID: [Insert your numerical student ID here]
+StudentID: [400436633,400446863]
