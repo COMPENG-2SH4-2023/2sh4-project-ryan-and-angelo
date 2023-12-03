@@ -168,7 +168,7 @@ void DrawScreen(void)
 
     if (myGM->getExitFlagStatus() && myGM->getLoseFlagStatus()) 
     {
-        MacUILib_printf("You Lose!"); //Printing you Lose if game is over due to loss (player collision)
+        MacUILib_printf("You Lose!"); //Printing You Lose! if game is over 
     }
 
 }
