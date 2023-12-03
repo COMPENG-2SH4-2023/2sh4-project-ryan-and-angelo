@@ -5,7 +5,7 @@
 #include "Player.h"
 
 
-// defualt constructor
+// defualt constructor, UNUSED BUT PREVIOUSLY USED FOR DEBUGGING PURPOSES
 Food::Food()
 {
     // foodPos.setObjPos(-1, -1, 'o');
@@ -15,13 +15,13 @@ Food::Food()
 Food::Food(GameMechs* foodGM)
 {
     foodGame = foodGM;
-    foodBucket = new objPosArrayList(); //assigning memory to the foodbucket
+    foodBucket = new objPosArrayList(); //allocated memory to the foodbucket
 }
 
 // destructor
 Food::~Food()
 {
-    delete foodBucket; // deallocating assigned memory
+    delete foodBucket; // deallocating allocated memory
 }
 
 void Food::generateFood(objPosArrayList& blockOff, int numFoods)
