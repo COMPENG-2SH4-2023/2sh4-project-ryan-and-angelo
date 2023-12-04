@@ -15,7 +15,7 @@ Food::Food()
 Food::Food(GameMechs* foodGM)
 {
     foodGame = foodGM;
-    foodBucket = new objPosArrayList(); //allocated memory to the foodbucket
+    foodBucket = new objPosArrayList(); //allocating memory for the foodbucket
 }
 
 // destructor
@@ -99,7 +99,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
 
                     newFood.symbol = '*'; //Assign food position and character symbol to '*'
 
-                    newFood.isSpecial1 = true; // Assigning this character to true for printing logic
+                    newFood.isSpecial1 = true; // Assigning this to true for printing logic
 
                     foodBucket->insertHead(newFood); //Then insert this as the element in newFood
                     
@@ -113,7 +113,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
 
                 newFood.symbol = '+'; //Assign food position and character symbol to '+'
 
-                newFood.isSpecial2 = true; // Assigning this character to true for printing logic
+                newFood.isSpecial2 = true; // Assigning this to true for printing logic 
 
                 foodBucket->insertHead(newFood); //Then insert this as the element in newFood
             }

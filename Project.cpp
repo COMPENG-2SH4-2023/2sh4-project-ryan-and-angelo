@@ -48,8 +48,8 @@ void Initialize(void)
     MacUILib_clearScreen();
 
     //Allocating memory onto the heap for desired instances of classes for the boardsize, food, player, and player list
-    myGM = new GameMechs(30, 15); //Boardsize
-    foodGen = new Food(myGM); //Food
+    myGM = new GameMechs(30, 15); 
+    foodGen = new Food(myGM); 
     myPlayer = new Player(myGM, foodGen); 
     playerPosList = new objPosArrayList(); 
 
@@ -67,7 +67,7 @@ void RunLogic(void)
 
     myPlayer->movePlayer();
 
-    myGM->clearInput(); //Running player movement and collsion logic dependent on player input, then clearing input for next iteration
+    myGM->clearInput(); //Running player movement and collision logic dependent on player input, then clearing input for next iteration
 
 }
 
@@ -112,12 +112,12 @@ void DrawScreen(void)
 
                     if (tempFood.x == j && tempFood.y == i) //Check if the food position aligns with the current board index
                     {
-                        if (tempFood.isSpecial1) // Bonus:Check if food is the first type of special food
+                        if (tempFood.isSpecial1) // Bonus:Check if food is the first type of special food (score food)
                         {
                             MacUILib_printf("%c", tempFood.symbol);  // Change this to the symbol for special food 1
                         } 
 
-                        else if (tempFood.isSpecial2) //Check if food is the second type of special food
+                        else if (tempFood.isSpecial2) //Check if food is the second type of special food (snake growth)
                         {
                             MacUILib_printf("%c", tempFood.symbol);  // Change this to the symbol for special food 2
                         } 
@@ -142,7 +142,7 @@ void DrawScreen(void)
                 } 
                 else
                 {
-                    MacUILib_printf(" "); //If none of the other items have been printed,print a blank space
+                    MacUILib_printf(" "); //If none of the other items have been printed, print a blank space
                 }
             }
         }

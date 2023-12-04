@@ -18,6 +18,7 @@ Player::Player(GameMechs* thisGMRef, Food* thisFoodRef)
     temporaryPos.setObjPos(mainGameMechsRef->getBoardSizeX() / 2, mainGameMechsRef->getBoardSizeY() / 2, '@'); // Default Player Position
 
     playerPosList = new objPosArrayList(); //Allocating memory on the heap for the player positions
+    
     playerPosList->insertHead(temporaryPos); // Inserting a player symbol at the default position
     
 }
@@ -53,7 +54,7 @@ void Player::updatePlayerDir()
             break;
 
         // case 'r':
-        //     foodRef->generateFood(*playerPosList, 5);
+        //     foodRef->generateFood(*playerPosList, 5); ORIGINAL LOGIC FOR CHANGING FOOD SPAWN POSITION
         //     break;
 
         case 'w':
@@ -98,7 +99,7 @@ void Player::movePlayer()
         mainGameMechsRef->setExitTrue(); // If the snake has collided with itself, end the game and print the lose screen
     } 
 
-    else // If no collsiion keep the snake moving
+    else // If no collision keep the snake moving
     {
         if (myDir == UP) // Check current direction
         {

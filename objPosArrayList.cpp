@@ -46,14 +46,15 @@ void objPosArrayList::insertTail(objPos thisPos)
         return; //Do nothing
     }
     aList[listSize].setObjPos(thisPos); //Otherwise inserting the tail
-    listSize++; //Increasing listSize
+
+    listSize++; //Increasing listSize to accomodate for growth
 }
 
 void objPosArrayList::removeHead()
 {
     if (listSize<=1) //Checking if list is 1 or 0
     { 
-        listSize=0; //Set list size to 0 (can't be smaller)
+        listSize=0; //Set list size to 0 (can't be smaller, no point in removing a 1 element head)
         return;
     }
 
@@ -62,7 +63,7 @@ void objPosArrayList::removeHead()
         aList[i].setObjPos(aList[i+1]);// Shuffle all list elements away from head
     }
 
-    listSize--; //Shrink listSize
+    listSize--; //Shrink listSize to accomodate for change in size
 }
 
 void objPosArrayList::removeTail()
