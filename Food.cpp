@@ -87,7 +87,7 @@ void Food::generateFood(objPosArrayList& blockOff, int numFoods)
 
         count++; //incrementing the count of base type foods spawned
 
-        if (count > numFoods - numSpecialFoods) // BONUS: Checking the amount of base food's is greater than 4 or 3 (depends on numSpecialFoods)
+        if (count > numFoods - numSpecialFoods) // BONUS: Checking if the amount of base food's is greater than 4 or 3 (depends on numSpecialFoods)
         {
             SpecialValue = rand () % 2; // Randomizing SpecialValue's value to either 0 or 1, result will determine what random food is spawned
 
